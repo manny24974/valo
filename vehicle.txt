@@ -1,0 +1,27 @@
+// Base class
+class Vehicle {
+  move(): void {
+    console.log("Vehicle is moving...");
+  }
+}
+
+// Derived class 1
+class Car extends Vehicle {
+  override move(): void {
+    console.log("Car is driving on the road...");
+  }
+}
+
+// Derived class 2
+class Bicycle extends Vehicle {
+  override move(): void {
+    console.log("Bicycle is pedaling on the path...");
+  }
+}
+
+// Usage
+const myCar = new Car();
+const myBike = new Bicycle();
+
+myCar.move();    // Output: Car is driving on the road...
+myBike.move();   // Output: Bicycle is pedaling on the path...

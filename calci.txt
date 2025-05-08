@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>TS Calculator</title>
+  <script src="calc.js" defer></script>
+</head>
+<body>
+  <h3>Simple Calculator</h3>
+  <input id="num1" type="number" placeholder="First number">
+  <input id="num2" type="number" placeholder="Second number">
+  
+  <select id="op">
+    <option value="+">+</option>
+    <option value="-">−</option>
+    <option value="*">×</option> 
+    <option value="/">÷</option>
+  </select>
+  
+  <button onclick="calculate()">=</button>
+  <p id="output"></p>
+</body>
+</html>
+
+
+function calculate(): void {
+  const n1 = parseFloat((document.getElementById("num1") as HTMLInputElement).value);
+  const n2 = parseFloat((document.getElementById("num2") as HTMLInputElement).value);
+  const op = (document.getElementById("op") as HTMLSelectElement).value;
+  const output = document.getElementById("output")!;
+
+  let result: number;
+
+  switch (op) {
+    case "+": result = n1 + n2; break;
+    case "-": result = n1 - n2; break;
+    case "*": result = n1 * n2; break;
+    case "/": result = n2 !== 0 ? n1 / n2 : NaN; break;
+    default:
+      output.textContent = "Please select a valid operator.";
+      return;
+  }
+
+  if (isNaN(result)) {
+    output.textContent = "Invalid input.";
+  } else {
+    output.textContent = Result: ${result};
+  }
+}
+
+// Make it accessible to HTML
+(window as any).calculate = calculate;

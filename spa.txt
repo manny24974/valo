@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html ng-app="taskApp"> <!-- Root element of AngularJS app -->
+<head>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+</head>
+<body ng-controller="ctrl"> <!-- Controller named 'ctrl' controls this section -->
+
+  <!-- Input field bound to 'task' variable using ng-model -->
+  <input ng-model="task" placeholder="New task">
+  
+  <!-- Button calls 'add()' function on click -->
+  <button ng-click="add()">Add</button>
+  
+  <!-- Loop through each task in 'tasks' array using ng-repeat -->
+  <ul>
+    <li ng-repeat="t in tasks">
+      {{t}} <!-- Display the task -->
+      <!-- Button removes task at current index -->
+      <button ng-click="remove($index)">x</button>
+    </li>
+  </ul>
+
+  <script>
+    // Define AngularJS app module
+    angular.module('taskApp', [])
+
+      // Define a service to manage tasks
+      .service('TaskService', function() {
+        const list = []; // Internal task list
+
+        this.get = () => list;             // Return all tasks
+        this.add = t => list.push(t);      // Add a task
+        this.remove = i => list.splice(i, 1); // Remove task by index
+      })
+
+      // Define controller 'ctrl' and inject TaskService
+      .controller('ctrl', function($scope, TaskService) {
+        $scope.tasks = TaskService.get(); // Bind service's task list to scope
+
+        // Add task to list and clear input
+        $scope.add = () => $scope.task && TaskService.add($scope.task) && ($scope.task = '');
+
+        // Remove task from list
+        $scope.remove = i => TaskService.remove(i);
+      });
+  </script>
+</body>
+</html>

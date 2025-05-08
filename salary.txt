@@ -1,0 +1,27 @@
+// Define Employee type
+type Employee = {
+  name: string;
+  baseSalary: number;
+  performanceRating: number;
+};
+
+// Array of employees
+const employees: Employee[] = [
+  { name: "Alice", baseSalary: 50000, performanceRating: 10 },
+  { name: "Bob", baseSalary: 40000, performanceRating: 5 },
+  { name: "Charlie", baseSalary: 60000, performanceRating: 10 }
+];
+
+// Arrow function to calculate bonus percentage
+const getBonusRate = (rating: number): number =>
+  rating === 10 ? 0.2 : rating === 5 ? 0.1 : 0;
+
+// Arrow function to calculate final salary
+const calculateFinalSalary = (emp: Employee): number =>
+  emp.baseSalary + emp.baseSalary * getBonusRate(emp.performanceRating);
+
+// Display final salaries
+employees.forEach(emp => {
+  const finalSalary = calculateFinalSalary(emp);
+  console.log(`${emp.name}'s final salary: ₹${finalSalary.toFixed(2)}`);
+});

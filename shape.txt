@@ -1,0 +1,34 @@
+class Shape {
+  color: string = "undefined";
+
+  setColor(c: string): void {
+    this.color = c;
+  }
+
+  display(): void {
+    console.log("Shape color is " + this.color);
+  }
+}
+
+class Circle extends Shape {
+  radius: number;
+
+  constructor(radius: number) {
+    super(); // call parent class constructor
+    this.radius = radius;
+  }
+
+  area(): number {
+    return Math.PI * this.radius * this.radius;
+  }
+
+  display(): void {
+    super.display(); // call parent class display
+    console.log("Circle area is " + this.area().toFixed(2));
+  }
+}
+
+// Usage
+const c1 = new Circle(5);
+c1.setColor("blue");
+c1.display();

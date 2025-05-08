@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>BMI Calculator</title>
+</head>
+<body>
+  <h3>BMI Calculator</h3>
+  <input id="weight" placeholder="Weight (kg)">
+  <input id="height" placeholder="Height (m)">
+  <button onclick="calculateBMI()">Calculate</button>
+  <p id="result"></p>
+
+  <script src="bmi.js"></script> <!-- compiled TypeScript file -->
+</body>
+</html>
+
+
+
+function calculateBMI(): void {
+  const w = parseFloat((<HTMLInputElement>document.getElementById("weight")).value);
+  const h = parseFloat((<HTMLInputElement>document.getElementById("height")).value);
+
+  if (w > 0 && h > 0) {
+    const bmi = w / (h * h);
+    document.getElementById("result")!.innerText = "BMI: " + bmi.toFixed(2);
+  } else {
+    document.getElementById("result")!.innerText = "Enter valid values";
+  }
+}
